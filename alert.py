@@ -26,7 +26,7 @@ TIMERS = [
   {'hour': 16, 'minute': 50, 'second': 0, 'microsecond': 0},
 ]
 
-MAIL_THRESHOLD = 40 * 60
+MAIL_THRESHOLD = 20  # minutes
 
 def set_timer():
   now = datetime.datetime.now().astimezone(tz=pytz.timezone('Europe/Amsterdam'))
@@ -120,24 +120,25 @@ def main():
       continue
 
     try:
-      entry = direction_routes(work, home)
+      route = direction_routes(work, home)
     except Exception as e:
       mail_result('failed', str(e))
       print(e)
       continue
 
-    entry.update({
+    entry = {
+      'duration_minutes': route['duration'] / 60,
       'departure': now.isoformat(),
-      'isoweekday': now.isoweekday(),
       'hour': now.hour,
       'minute': now.minute,
-    })
+      'isoweekday': now.isoweekday(),
+      'route': route,
+    }
 
     res = json.dumps(entry)
-
     log(res + '\n', 'alert.log')
 
-    if entry['duration'] > MAIL_THRESHOLD:
+    if entry['duration_minutes'] > MAIL_THRESHOLD:
       msg = json.dumps(entry, indent=4)
       mail_result('alert', msg)
 
