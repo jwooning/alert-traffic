@@ -1,0 +1,17 @@
+services:
+  ddns:
+    container_name: alert-traffic
+    user: "121:120"
+    image: jwooning/alert-traffic
+    pull_policy: build
+    build: .
+    restart: always
+    volumes:
+      - /home/joost/maildir:/maildir
+      - /home/joost/docker_volumes/traffic_logs:/logs
+    environment:
+      - UMASK=002
+      - MAILQUEUE_TO=mail@example.com
+      - MAPBOX_TOKEN=
+      - LONLAT_WORK=4.700000,51.600000
+      - LONLAT_HOME=4.400000,51.600000
