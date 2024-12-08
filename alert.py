@@ -21,9 +21,9 @@ REQUIRED_ENVIRON = [
 
 WORKDAYS = [1, 2, 3, 4, 5]
 TIMERS = [
-  {'hour': 16, 'minute': 30},
-  {'hour': 16, 'minute': 40},
-  {'hour': 16, 'minute': 50},
+  {'hour': 16, 'minute': 30, 'second': 0, 'microsecond': 0},
+  {'hour': 16, 'minute': 40, 'second': 0, 'microsecond': 0},
+  {'hour': 16, 'minute': 50, 'second': 0, 'microsecond': 0},
 ]
 
 MAIL_THRESHOLD = 40 * 60
@@ -151,7 +151,7 @@ if __name__ == '__main__':
       ok = False
 
   if not ok:
-    return
+    sys.exit(1)
 
   if 'UMASK' in os.environ:
     os.umask(int(os.environ['UMASK'], 8))
