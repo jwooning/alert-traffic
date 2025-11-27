@@ -17,6 +17,7 @@ REQUIRED_ENVIRON = [
   'MAPBOX_TOKEN',
   'LONLAT_WORK',
   'LONLAT_HOME',
+  'MAIL_THRESHOLD',
 ]
 
 WORKDAYS = [1, 2, 3, 4, 5]
@@ -26,7 +27,7 @@ TIMERS = [
   {'hour': 16, 'minute': 50, 'second': 0, 'microsecond': 0},
 ]
 
-MAIL_THRESHOLD = os.environ['MAILQUEUE_TO']  # minutes
+MAIL_THRESHOLD = os.environ['MAIL_THRESHOLD']  # minutes
 
 def set_timer():
   now = datetime.datetime.now().astimezone(tz=pytz.timezone('Europe/Amsterdam'))
