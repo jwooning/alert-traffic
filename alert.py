@@ -26,7 +26,7 @@ TIMERS = [
   {'hour': 16, 'minute': 50, 'second': 0, 'microsecond': 0},
 ]
 
-MAIL_THRESHOLD = 40  # minutes
+MAIL_THRESHOLD = os.environ['MAILQUEUE_TO']  # minutes
 
 def set_timer():
   now = datetime.datetime.now().astimezone(tz=pytz.timezone('Europe/Amsterdam'))
